@@ -33,16 +33,19 @@
           </g>
           <g id="Text Begin">
             <path
+              id="leftwhiterect"
               d="M 437 15 L 495 15 A 12 12, 0, 0, 1, 495 39 L 437 39 Z"
               fill="white"
               fill-opacity="0.3"
             />
             <path
+              id="rightwhiterect"
               d="M 363 15 L 305 15 A 12 12, 0, 0, 0, 305 39 L 363 39 Z"
               fill="white"
               fill-opacity="0.3"
             />
             <rect
+              id="middlewhiterect"
               x="365"
               y="15"
               width="70"
@@ -72,7 +75,7 @@
               fill-opacity="1"
               text-anchor="middle"
             >
-              Game 1
+              
             </text>
             <text
               id="score"
@@ -896,9 +899,39 @@
         }
         if (data["s"]) {
           matchType = data["s"]["i"];
+          switch (matchType) {
+            case 53:
+              $('#setScore').attr('x', 449)
+              $('#period').attr('x', 351)
+              $("#leftwhiterect").attr(
+                "d",
+                "M 403 15 L 495 15 A 12 12, 0, 0, 1, 495 39 L 403 39 Z"
+              );
+              $("#rightwhiterect").attr(
+                "d",
+                "M 397 15 L 305 15 A 12 12, 0, 0, 0, 305 39 L 397 39 Z"
+              );
+              $("#middlewhiterect").attr("fill-opacity", "0");
+              break;
+            case 52:
+              $('#setScore').attr('x', 466)
+              $('#period').attr('x', 334)
+              $("#leftwhiterect").attr(
+                "d",
+                "M 437 15 L 495 15 A 12 12, 0, 0, 1, 495 39 L 437 39 Z"
+              );
+              $("#rightwhiterect").attr(
+                "d",
+                "M 363 15 L 305 15 A 12 12, 0, 0, 0, 305 39 L 363 39 Z"
+              );
+              $("#middlewhiterect").attr("fill-opacity", "0.3");
+              break;
+          }
         }
         if (matchType) {
           switch (matchType) {
+            case 53:
+              break;
             case 52:
               if (data["p"] && data["p"]["n"]) {
                 $("#period").text(data["p"]["n"]);
