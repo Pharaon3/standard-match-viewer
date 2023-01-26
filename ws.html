@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body onload="connect()">
+
+<script type="text/javascript">
+var socket;
+var socketLastResponseTime = 0;
+
+function connect() {
+	const urlParams = new URLSearchParams(window.location.search);
+	const eventId = Number(urlParams.get('eventId'));
+
+	socket = new WebSocket('wss://gamecast1.betdata.pro:2053');
+	socket.onopen=function(e) {
+		socketLastResponseTime = Date.now();
+		socket.send(JSON.stringify({r:'subscribe_event', a:{id:eventId}}));
+	};
+
+	socket.onmessage=function(e) {
+		socketLastResponseTime = Date.now();
+		var data = JSON.parse(e.data);
+
+		if (data.r == 'event') {
+			handleEventData(data.d);
+		}
+	};
+}
+
+setInterval(function() {
+	if (socketLastResponseTime && (Date.now() - socketLastResponseTime) > 8000) {
+		if (socket) {
+			try {
+				socket.close();
+			} catch (err) {};
+		}
+		console.log('Reconnecting...');
+		connect();
+	}
+}, 4000);
+
+function handleEventData(data) {
+
+	// Do the thing.
+
+}
+</script>
+</body>
+</html>
