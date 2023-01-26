@@ -952,6 +952,11 @@
                   );
                 }
               }
+              if (data["p"]) {
+                $("#period").text(data["p"]["n"]);
+                if (data["p"]["n"] == "Recently Ended")
+                  $("#period").text("Ended");
+              }
               break;
           }
         }
