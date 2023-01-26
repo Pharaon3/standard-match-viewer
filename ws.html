@@ -892,40 +892,43 @@
           $("#awayTeamName").text(awayName);
           $("#score").text(homeScore + "-" + awayScore);
           $("#pitchImage").attr("href", "./media/" + data["s"]["i"] + ".png");
-          switch (data["s"]["i"]) {
-            case 50:
-              //   console.log("soccer");
-              break;
-            case 53:
-              console.log("basketball");
-              break;
-            case 52:
-              //   console.log("tennis");
-              for (let i = 1; i < 5; i++) {
-                if (data["ps"]["" + i + ""]) {
-                  $("#homeScore" + i).text(data["ps"]["" + i]["score"]["c1"]);
-                  $("#awayScore" + i).text(data["ps"]["" + i]["score"]["c2"]);
-                  if (isRevers) {
-                    $("#homeScore" + i).text(data["ps"]["" + i]["score"]["c2"]);
-                    $("#awayScore" + i).text(data["ps"]["" + i]["score"]["c1"]);
-                  }
+        }
+        switch (data["s"]["i"]) {
+          case 50:
+            //   console.log("soccer");
+            break;
+          case 53:
+            console.log("basketball");
+            break;
+          case 52:
+            //   console.log("tennis");
+            for (let i = 1; i < 5; i++) {
+              if (data["ps"]["" + i + ""]) {
+                $("#homeScore" + i).text(data["ps"]["" + i]["score"]["c1"]);
+                $("#awayScore" + i).text(data["ps"]["" + i]["score"]["c2"]);
+                if (isRevers) {
+                  $("#homeScore" + i).text(data["ps"]["" + i]["score"]["c2"]);
+                  $("#awayScore" + i).text(data["ps"]["" + i]["score"]["c1"]);
                 }
+                $("#gameCount").text("Game " + i);
               }
-              $("#setScore").text(homeScore + "-" + awayScore);
+            }
+            $("#setScore").text(homeScore + "-" + awayScore);
+            $("#score").text(
+              data["ps"]["CS"]["score"]["c1"] +
+                "-" +
+                data["ps"]["CS"]["score"]["c2"]
+            );
+            if (isRevers) {
               $("#score").text(
-                data["ps"]["CS"]["score"]["c1"] +
+                data["ps"]["CS"]["score"]["c2"] +
                   "-" +
-                  data["ps"]["CS"]["score"]["c2"]
+                  data["ps"]["CS"]["score"]["c1"]
               );
-              if (isRevers) {
-                $("#score").text(
-                  data["ps"]["CS"]["score"]["c2"] +
-                    "-" +
-                    data["ps"]["CS"]["score"]["c1"]
-                );
-              }
-              break;
-          }
+            }
+            $("#period").text(data["p"]["n"]);
+			if(data['p']['n'] == 'Recently Ended') $("#period").text('Ended');
+            break;
         }
       }
 
