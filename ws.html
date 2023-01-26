@@ -938,7 +938,7 @@
         if (matchType) {
           switch (matchType) {
             case 52:
-              if (data["ps"]) {
+              if (data["ps"] && data["ps"]["CS"]) {
                 $("#score").text(
                   data["ps"]["CS"]["score"]["c1"] +
                     "-" +
@@ -952,10 +952,19 @@
                   );
                 }
               }
-              if (data["p"]) {
+              if (data["p"] && data["p"]["n"]) {
                 $("#period").text(data["p"]["n"]);
                 if (data["p"]["n"] == "Recently Ended")
                   $("#period").text("Ended");
+              }
+              if (data["ps"] && data["ps"]["TN"]) {
+                homeScore = data["ps"]["TN"]["score"]["c1"];
+                awayScore = data["ps"]["TN"]["score"]["c2"];
+                if (isRevers) {
+                  homeScore = data["ps"]["TN"]["score"]["c2"];
+                  awayScore = data["ps"]["TN"]["score"]["c1"];
+                }
+                $("#setScore").text(homeScore + "-" + awayScore);
               }
               break;
           }
