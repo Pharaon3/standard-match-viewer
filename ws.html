@@ -1,6 +1,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" href="./css/main.css" rel="stylesheet" />
   </head>
   <body onload="connect()">
     <style>
@@ -14,15 +15,7 @@
         src: url("./fonts/InriaSans-Bold.ttf");
       }
     </style>
-    <div
-      style="
-        display: flex;
-        align-items: center;
-        align-content: center;
-        width: 100%;
-        justify-content: center;
-      "
-    >
+    <div class="mainDiv">
       <svg id="svg" width="800" height="425">
         <filter id="shadow" color-interpolation-filters="sRGB">
           <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.7" />
@@ -931,7 +924,9 @@
           connect();
         }
       }, 4000);
-
+      setInterval(function () {
+        changeScreenSize();
+      }, 10);
       function handleEventData(data) {
         switch (data["s"]["i"]) {
           case 50:
@@ -939,10 +934,28 @@
             break;
           case 53:
             console.log("basketball");
+            break;
           case 52:
             console.log("tennis");
             break;
         }
+      }
+
+      function changeScreenSize() {
+        screenHeight = window.innerHeight;
+        screenWidth = window.innerWidth;
+
+        scale = min(screenWidth / 800, screenHeight / 425);
+
+        document
+          .getElementById("scale")
+          .setAttribute("transform", "scale(" + scale + ")");
+        document.getElementById("svg").setAttribute("width", 800 * scale);
+        document.getElementById("svg").setAttribute("height", 425 * scale);
+      }
+      function min(a, b) {
+        if (a > b) return b;
+        return a;
       }
     </script>
   </body>
