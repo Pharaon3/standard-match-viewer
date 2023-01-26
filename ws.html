@@ -933,7 +933,16 @@
       }, 4000);
 
       function handleEventData(data) {
-        // Do the thing.
+        switch (data["s"]["i"]) {
+          case 50:
+            console.log("soccer");
+            break;
+          case 53:
+            console.log("basketball");
+          case 52:
+            console.log("tennis");
+            break;
+        }
       }
     </script>
   </body>
