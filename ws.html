@@ -1010,17 +1010,15 @@
               // Cricket
               matchDuration = 60;
               isCountUp = true;
-              $("#setScore").attr("x", 449);
-              $("#period").attr("x", 351);
-              $("#leftwhiterect").attr(
-                "d",
-                "M 403 15 L 495 15 A 12 12, 0, 0, 1, 495 39 L 403 39 Z"
-              );
-              $("#rightwhiterect").attr(
-                "d",
-                "M 397 15 L 305 15 A 12 12, 0, 0, 0, 305 39 L 397 39 Z"
-              );
-              $("#middlewhiterect").attr("fill-opacity", "0");
+              $("#setScore").attr("fill", 'none');
+              $("#period").attr("x", 400);
+              $("#leftwhiterect").attr("fill-opacity", "0");
+              $("#rightwhiterect").attr("fill-opacity", "0");
+              $("#middlewhiterect").attr("fill-opacity", "0.3");
+              $("#middlewhiterect").attr("rx", "12");
+              $("#middlewhiterect").attr("ry", "12");
+              $("#middlewhiterect").attr("x", "350");
+              $("#middlewhiterect").attr("width", "100");
               $("#scoreTableGroup").attr(
                 "transform",
                 "translate(100000, 100000)"
