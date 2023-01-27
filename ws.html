@@ -1086,8 +1086,18 @@
                     "-" +
                     data["ps"]["TN"]["score"]["c2"]
                 );
+                $("#bottom_text").text(
+                  data["ps"]["TN"]["score"]["c1"] +
+                    "-" +
+                    data["ps"]["TN"]["score"]["c2"]
+                );
                 if (isRevers) {
                   $("#score").text(
+                    data["ps"]["TN"]["score"]["c2"] +
+                      "-" +
+                      data["ps"]["TN"]["score"]["c1"]
+                  );
+                  $("#bottom_text").text(
                     data["ps"]["TN"]["score"]["c2"] +
                       "-" +
                       data["ps"]["TN"]["score"]["c1"]
