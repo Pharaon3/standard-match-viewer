@@ -986,6 +986,25 @@
               $("#tableName4").attr("x", "540");
               $("#tableName5").attr("x", "590");
               break;
+            case 51:
+              // Hockey
+              isCountUp = true;
+              $("#setScore").attr("x", 449);
+              $("#period").attr("x", 351);
+              $("#leftwhiterect").attr(
+                "d",
+                "M 403 15 L 495 15 A 12 12, 0, 0, 1, 495 39 L 403 39 Z"
+              );
+              $("#rightwhiterect").attr(
+                "d",
+                "M 397 15 L 305 15 A 12 12, 0, 0, 0, 305 39 L 397 39 Z"
+              );
+              $("#middlewhiterect").attr("fill-opacity", "0");
+              $("#scoreTableGroup").attr(
+                "transform",
+                "translate(100000, 100000)"
+              );
+              break;
           }
         }
         if (matchType) {
