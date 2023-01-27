@@ -1164,6 +1164,18 @@
               break;
             case 75:
               // Cricket
+              if (data["cl"]) {
+                setTimer(data["cl"]["m"], data["cl"]["s"]);
+                isTimerRunning = data["cl"]["r"];
+                $("#setScore").text(
+                  Math.floor(data["cl"]["m"] / 10) +
+                    "" +
+                    (data["cl"]["m"] % 10) +
+                    ":" +
+                    Math.floor(data["cl"]["s"] / 10) +
+                    (data["cl"]["s"] % 10)
+                );
+              }
               if (data["p"] && data["p"]["n"]) {
                 $("#period").text(data["p"]["n"]);
                 if (data["p"]["n"] == "Recently Ended")
