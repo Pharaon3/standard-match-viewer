@@ -108,7 +108,7 @@
           " fill-opacity='0.5' />
         <text id="center_text" fill="#fff" font-size="38" font-family="InriaSans" x="400" y="270" fill-opacity="1"
           text-anchor="middle">Limited Coverage</text>
-        <text id="bottom_text" fill="#fff" font-size="30" font-family="InriaSans" x="400" y="310" fill-opacity="0.71"
+        <text id="bottom_text" fill="#fff" font-size="50" font-family="InriaSans" x="400" y="320" fill-opacity="0.71"
           text-anchor="middle">0-0</text>
             <g transform="translate(20, -140)">
               <g id="scoreTableGroup" transform="scale(0.8)">
@@ -1208,6 +1208,7 @@
                   awayScore = data["ps"]["TN"]["score"]["c1"];
                 }
                 $("#setScore").text(homeScore + "-" + awayScore);
+                $("#bottom_text").text(homeScore + "-" + awayScore);
               }
               if (data["ps"]) {
                 for (let i = 1; i < 6; i++) {
