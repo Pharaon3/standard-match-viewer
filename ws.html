@@ -23,13 +23,7 @@
         </filter>
         <g id="scale" transform="scale(1)">
           <g id="pitch">
-            <image
-              id="pitchImage"
-              href="./media/53.png"
-              x="0"
-              y="0"
-              width="800"
-            />
+            <image id="pitchImage" href="" x="0" y="0" width="800" />
           </g>
           <g id="Text Begin">
             <path
@@ -105,7 +99,7 @@
               x="210"
               y="210"
               width="380"
-              height="140"
+              height="100"
               style="
                 fill: black;
                 stroke: grey;
@@ -128,7 +122,7 @@
             </text>
             <text
               id="bottom_text"
-              fill="#fff"
+              fill="none"
               font-size="50"
               font-family="InriaSans"
               x="400"
@@ -353,10 +347,10 @@
                 <text
                   id="homeScore1"
                   fill="#acf"
-                  font-size="18"
+                  font-size="30"
                   font-family="InriaSans-Bold"
                   x="390"
-                  y="350"
+                  y="358"
                   fill-opacity="1"
                   text-anchor="middle"
                   font-weight="900"
@@ -366,10 +360,10 @@
                 <text
                   id="homeScore2"
                   fill="#acf"
-                  font-size="18"
+                  font-size="30"
                   font-family="InriaSans-Bold"
                   x="440"
-                  y="350"
+                  y="358"
                   fill-opacity="1"
                   text-anchor="middle"
                   font-weight="900"
@@ -379,10 +373,10 @@
                 <text
                   id="homeScore3"
                   fill="#acf"
-                  font-size="18"
+                  font-size="30"
                   font-family="InriaSans-Bold"
                   x="490"
-                  y="350"
+                  y="358"
                   fill-opacity="1"
                   text-anchor="middle"
                   font-weight="900"
@@ -392,10 +386,10 @@
                 <text
                   id="homeScore4"
                   fill="#acf"
-                  font-size="18"
+                  font-size="30"
                   font-family="InriaSans-Bold"
                   x="540"
-                  y="350"
+                  y="358"
                   fill-opacity="1"
                   text-anchor="middle"
                   font-weight="900"
@@ -405,10 +399,10 @@
                 <text
                   id="homeScore5"
                   fill="#acf"
-                  font-size="18"
+                  font-size="30"
                   font-family="InriaSans-Bold"
                   x="590"
-                  y="350"
+                  y="358"
                   fill-opacity="1"
                   text-anchor="middle"
                   font-weight="900"
@@ -418,10 +412,10 @@
                 <text
                   id="awayScore1"
                   fill="#afa"
-                  font-size="18"
+                  font-size="30"
                   font-family="InriaSans-Bold"
                   x="390"
-                  y="380"
+                  y="388"
                   fill-opacity="1"
                   text-anchor="middle"
                   font-weight="900"
@@ -431,10 +425,10 @@
                 <text
                   id="awayScore2"
                   fill="#afa"
-                  font-size="18"
+                  font-size="30"
                   font-family="InriaSans-Bold"
                   x="440"
-                  y="380"
+                  y="388"
                   fill-opacity="1"
                   text-anchor="middle"
                   font-weight="900"
@@ -444,10 +438,10 @@
                 <text
                   id="awayScore3"
                   fill="#afa"
-                  font-size="18"
+                  font-size="30"
                   font-family="InriaSans-Bold"
                   x="490"
-                  y="380"
+                  y="388"
                   fill-opacity="1"
                   text-anchor="middle"
                   font-weight="900"
@@ -457,10 +451,10 @@
                 <text
                   id="awayScore4"
                   fill="#afa"
-                  font-size="18"
+                  font-size="30"
                   font-family="InriaSans-Bold"
                   x="540"
-                  y="380"
+                  y="388"
                   fill-opacity="1"
                   text-anchor="middle"
                   font-weight="900"
@@ -470,10 +464,10 @@
                 <text
                   id="awayScore5"
                   fill="#afa"
-                  font-size="18"
+                  font-size="30"
                   font-family="InriaSans-Bold"
                   x="590"
-                  y="380"
+                  y="388"
                   fill-opacity="1"
                   text-anchor="middle"
                   font-weight="900"
@@ -767,6 +761,12 @@
           if (isRevers) {
             homeName = data["c2"]["n"];
             awayName = data["c1"]["n"];
+          }
+          if (homeName.length > 13) {
+            homeName = homeName.substr(0, 10) + "...";
+          }
+          if (awayName.length > 13) {
+            awayName = awayName.substr(0, 10) + "...";
           }
           $("#homeTeamName").text(homeName);
           $("#awayTeamName").text(awayName);
@@ -1086,9 +1086,13 @@
               }
               if (data["ps"]) {
                 for (let i = 1; i < 6; i++) {
+                  let gameCount = 0;
                   if (data["ps"]["" + i + ""]) {
                     $("#homeScore" + i).text(data["ps"]["" + i]["score"]["c1"]);
                     $("#awayScore" + i).text(data["ps"]["" + i]["score"]["c2"]);
+                    gameCount +=
+                      data["ps"]["" + i]["score"]["c1"] +
+                      data["ps"]["" + i]["score"]["c2"];
                     if (isRevers) {
                       $("#homeScore" + i).text(
                         data["ps"]["" + i]["score"]["c2"]
@@ -1097,7 +1101,7 @@
                         data["ps"]["" + i]["score"]["c1"]
                       );
                     }
-                    $("#gameCount").text("Game " + i);
+                    $("#gameCount").text("Game " + gameCount + 1);
                   }
                 }
               }
