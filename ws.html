@@ -74,9 +74,7 @@
               y="33"
               fill-opacity="1"
               text-anchor="middle"
-            >
-              
-            </text>
+            ></text>
             <text
               id="score"
               fill="#fff"
@@ -836,9 +834,14 @@
       var socketLastResponseTime = 0;
       var matchType;
       var homeName, awayName, homeScore, awayScore;
-      var isRevers;
+      var miliSeconds, matchDuration;
+      var isRevers, isTimerRunning, isCountUp;
 
       function connect() {
+        miliSeconds = 0;
+        matchDuration = 90;
+        isTimerRunning = false;
+        isCountUp = true;
         const urlParams = new URLSearchParams(window.location.search);
         const eventId = Number(urlParams.get("eventId"));
 
@@ -876,6 +879,24 @@
       }, 4000);
       setInterval(function () {
         changeScreenSize();
+        if (isTimerRunning && matchType) {
+          if (isCountUp) miliSeconds += 10;
+          else miliSeconds -= 10;
+          miliSeconds = sat(miliSeconds, 0, matchDuration * 60 * 1000);
+          seconds = Math.floor(miliSeconds / 1000);
+          second = seconds % 60;
+          minutes = Math.floor(seconds / 60);
+          if (matchType != 52) {
+            $("#setScore").text(
+              Math.floor(minutes / 10) +
+                "" +
+                (minutes % 10) +
+                ":" +
+                Math.floor(second / 10) +
+                (second % 10)
+            );
+          }
+        }
       }, 10);
       function handleEventData(data) {
         if (data["wm"] && data["wm"] == "f") {
@@ -901,8 +922,11 @@
           matchType = data["s"]["i"];
           switch (matchType) {
             case 53:
-              $('#setScore').attr('x', 449)
-              $('#period').attr('x', 351)
+              // Basketball
+              matchDuration = 48;
+              isCountUp = false;
+              $("#setScore").attr("x", 449);
+              $("#period").attr("x", 351);
               $("#leftwhiterect").attr(
                 "d",
                 "M 403 15 L 495 15 A 12 12, 0, 0, 1, 495 39 L 403 39 Z"
@@ -914,8 +938,10 @@
               $("#middlewhiterect").attr("fill-opacity", "0");
               break;
             case 52:
-              $('#setScore').attr('x', 466)
-              $('#period').attr('x', 334)
+              // Tennis
+              isCountUp = true;
+              $("#setScore").attr("x", 466);
+              $("#period").attr("x", 334);
               $("#leftwhiterect").attr(
                 "d",
                 "M 437 15 L 495 15 A 12 12, 0, 0, 1, 495 39 L 437 39 Z"
@@ -931,8 +957,22 @@
         if (matchType) {
           switch (matchType) {
             case 53:
+              // Basketball
+              if (data["cl"]) {
+                setTimer(data["cl"]["m"], data["cl"]["s"]);
+                isTimerRunning = data["cl"]["r"];
+                $("#setScore").text(
+                  Math.floor(data["cl"]["m"] / 10) +
+                    "" +
+                    (data["cl"]["m"] % 10) +
+                    ":" +
+                    Math.floor(data["cl"]["s"] / 10) +
+                    (data["cl"]["s"] % 10)
+                );
+              }
               break;
             case 52:
+              // Tennis
               if (data["p"] && data["p"]["n"]) {
                 $("#period").text(data["p"]["n"]);
                 if (data["p"]["n"] == "Recently Ended")
@@ -998,6 +1038,18 @@
       function min(a, b) {
         if (a > b) return b;
         return a;
+      }
+      function max(a, b) {
+        if (a > b) return a;
+        return b;
+      }
+      function setTimer(m, s) {
+        miliSeconds = (m * 60 + s) * 1000;
+      }
+      function sat(toSat, minSat, maxSat) {
+        toSat = max(toSat, minSat);
+        toSat = min(toSat, maxSat);
+        return toSat;
       }
     </script>
   </body>
