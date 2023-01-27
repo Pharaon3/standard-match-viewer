@@ -730,7 +730,7 @@
         if (isTimerRunning && matchType) {
           if (isCountUp) miliSeconds += 10;
           else miliSeconds -= 10;
-          miliSeconds = sat(miliSeconds, 0, matchDuration * 60 * 1000);
+          // miliSeconds = sat(miliSeconds, 0, matchDuration * 60 * 1000);
           seconds = Math.floor(miliSeconds / 1000);
           second = seconds % 60;
           minutes = Math.floor(seconds / 60);
