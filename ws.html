@@ -1092,7 +1092,7 @@
                     $("#awayScore" + i).text(data["ps"]["" + i]["score"]["c2"]);
                     gameCount +=
                       data["ps"]["" + i]["score"]["c1"] +
-                      data["ps"]["" + i]["score"]["c2"];
+                      data["ps"]["" + i]["score"]["c2"] + 1;
                     if (isRevers) {
                       $("#homeScore" + i).text(
                         data["ps"]["" + i]["score"]["c2"]
@@ -1101,7 +1101,7 @@
                         data["ps"]["" + i]["score"]["c1"]
                       );
                     }
-                    $("#gameCount").text("Game " + gameCount + 1);
+                    $("#gameCount").text("Game " + gameCount);
                   }
                 }
               }
