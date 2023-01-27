@@ -988,7 +988,7 @@
               break;
             case 51:
               // Hockey
-              matchDuration = 60
+              matchDuration = 60;
               isCountUp = true;
               $("#setScore").attr("x", 449);
               $("#period").attr("x", 351);
@@ -1008,7 +1008,7 @@
               break;
             case 75:
               // Cricket
-              matchDuration = 60
+              matchDuration = 60;
               isCountUp = true;
               $("#setScore").attr("x", 449);
               $("#period").attr("x", 351);
@@ -1025,7 +1025,8 @@
                 "transform",
                 "translate(100000, 100000)"
               );
-              $('#score').attr('font-size', 40)
+              $("#score").attr("font-size", 40);
+              $("#score").attr("y", 85);
               break;
           }
         }
