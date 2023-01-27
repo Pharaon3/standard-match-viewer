@@ -1006,6 +1006,26 @@
                 "translate(100000, 100000)"
               );
               break;
+            case 75:
+              // Cricket
+              matchDuration = 60
+              isCountUp = true;
+              $("#setScore").attr("x", 449);
+              $("#period").attr("x", 351);
+              $("#leftwhiterect").attr(
+                "d",
+                "M 403 15 L 495 15 A 12 12, 0, 0, 1, 495 39 L 403 39 Z"
+              );
+              $("#rightwhiterect").attr(
+                "d",
+                "M 397 15 L 305 15 A 12 12, 0, 0, 0, 305 39 L 397 39 Z"
+              );
+              $("#middlewhiterect").attr("fill-opacity", "0");
+              $("#scoreTableGroup").attr(
+                "transform",
+                "translate(100000, 100000)"
+              );
+              break;
           }
         }
         if (matchType) {
@@ -1139,6 +1159,36 @@
                     }
                     $("#gameCount").text("Game " + i);
                   }
+                }
+              }
+              break;
+            case 75:
+              // Cricket
+              if (data["p"] && data["p"]["n"]) {
+                $("#period").text(data["p"]["n"]);
+                if (data["p"]["n"] == "Recently Ended")
+                  $("#period").text("Ended");
+              }
+              if (data["ps"] && data["ps"]["CS"]) {
+                $("#score").text(
+                  data["ps"]["CS"]["score"]["c1"] +
+                    "-" +
+                    data["ps"]["CS"]["score"]["c2"]
+                );
+                if (isRevers) {
+                  $("#score").text(
+                    data["ps"]["CS"]["score"]["c2"] +
+                      "-" +
+                      data["ps"]["CS"]["score"]["c1"]
+                  );
+                }
+              }
+              if (data["ps"] && data["ps"]["TN"]) {
+                homeScore = data["ps"]["TN"]["score"]["c1"];
+                awayScore = data["ps"]["TN"]["score"]["c2"];
+                if (isRevers) {
+                  homeScore = data["ps"]["TN"]["score"]["c2"];
+                  awayScore = data["ps"]["TN"]["score"]["c1"];
                 }
               }
               break;
