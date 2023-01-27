@@ -1122,6 +1122,10 @@
                   $("#period").text("Ended");
               }
               if (data["ps"] && data["ps"]["CS"]) {
+                if (!data["ps"]["CS"]["score"]["c1"])
+                  data["ps"]["CS"]["score"]["c1"] = 0;
+                if (!data["ps"]["CS"]["score"]["c2"])
+                  data["ps"]["CS"]["score"]["c2"] = 0;
                 $("#score").text(
                   data["ps"]["CS"]["score"]["c1"] +
                     "-" +
@@ -1152,6 +1156,10 @@
                   homeScore = data["ps"]["TN"]["score"]["c2"];
                   awayScore = data["ps"]["TN"]["score"]["c1"];
                 }
+                if (!homeScore || homeScore == "") homeScore = 0;
+                if (!awayScore || awayScore == "") awayScore = 0;
+                $("#score").text(homeScore + "-" + awayScore);
+                $("#bottom_text").text(homeScore + "-" + awayScore);
               }
               break;
           }
