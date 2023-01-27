@@ -937,28 +937,28 @@
               );
               $("#middlewhiterect").attr("fill-opacity", "0");
               // Score Table Setting
-              $('#tableName1').text('1 QUARTER')
-              $('#tableName2').text('2 QUARTER')
-              $('#tableName3').text('3 QUARTER')
-              $('#tableName4').text('4 QUARTER')
-              $('#tableName5').text('')
-              $('#tableName1').attr('x', '395')
-              $('#tableName2').attr('x', '460')
-              $('#tableName3').attr('x', '525')
-              $('#tableName4').attr('x', '590')
+              $("#tableName1").text("1 QUARTER");
+              $("#tableName2").text("2 QUARTER");
+              $("#tableName3").text("3 QUARTER");
+              $("#tableName4").text("4 QUARTER");
+              $("#tableName5").text("");
+              $("#tableName1").attr("x", "395");
+              $("#tableName2").attr("x", "460");
+              $("#tableName3").attr("x", "525");
+              $("#tableName4").attr("x", "590");
 
-              $('#homeScore1').attr('x', '395')
-              $('#homeScore2').attr('x', '460')
-              $('#homeScore3').attr('x', '525')
-              $('#homeScore4').attr('x', '590')
+              $("#homeScore1").attr("x", "395");
+              $("#homeScore2").attr("x", "460");
+              $("#homeScore3").attr("x", "525");
+              $("#homeScore4").attr("x", "590");
 
-              $('#awayScore1').attr('x', '395')
-              $('#awayScore2').attr('x', '460')
-              $('#awayScore3').attr('x', '525')
-              $('#awayScore4').attr('x', '590')
+              $("#awayScore1").attr("x", "395");
+              $("#awayScore2").attr("x", "460");
+              $("#awayScore3").attr("x", "525");
+              $("#awayScore4").attr("x", "590");
 
-              $('#homeScore5').text('')
-              $('#awayScore5').text('')
+              $("#homeScore5").text("");
+              $("#awayScore5").text("");
 
               break;
             case 52:
@@ -975,16 +975,16 @@
                 "M 363 15 L 305 15 A 12 12, 0, 0, 0, 305 39 L 363 39 Z"
               );
               $("#middlewhiterect").attr("fill-opacity", "0.3");
-              $('#tableName1').text('1st Set')
-              $('#tableName2').text('2nd Set')
-              $('#tableName3').text('3rd Set')
-              $('#tableName4').text('4th Set')
-              $('#tableName5').text('5th Set')
-              $('#tableName1').attr('x', '390')
-              $('#tableName2').attr('x', '440')
-              $('#tableName3').attr('x', '490')
-              $('#tableName4').attr('x', '540')
-              $('#tableName5').attr('x', '590')
+              $("#tableName1").text("1st Set");
+              $("#tableName2").text("2nd Set");
+              $("#tableName3").text("3rd Set");
+              $("#tableName4").text("4th Set");
+              $("#tableName5").text("5th Set");
+              $("#tableName1").attr("x", "390");
+              $("#tableName2").attr("x", "440");
+              $("#tableName3").attr("x", "490");
+              $("#tableName4").attr("x", "540");
+              $("#tableName5").attr("x", "590");
               break;
           }
         }
@@ -1003,6 +1003,41 @@
                     Math.floor(data["cl"]["s"] / 10) +
                     (data["cl"]["s"] % 10)
                 );
+              }
+              if (data["p"] && data["p"]["n"]) {
+                $("#period").text(data["p"]["n"]);
+                if (data["p"]["n"] == "Recently Ended")
+                  $("#period").text("Ended");
+              }
+              if (data["ps"] && data["ps"]["TN"]) {
+                $("#score").text(
+                  data["ps"]["TN"]["score"]["c1"] +
+                    "-" +
+                    data["ps"]["TN"]["score"]["c2"]
+                );
+                if (isRevers) {
+                  $("#score").text(
+                    data["ps"]["TN"]["score"]["c2"] +
+                      "-" +
+                      data["ps"]["TN"]["score"]["c1"]
+                  );
+                }
+              }
+              if (data["ps"]) {
+                for (let i = 1; i < 5; i++) {
+                  if (data["ps"]["" + i + ""]) {
+                    $("#homeScore" + i).text(data["ps"]["" + i]["score"]["c1"]);
+                    $("#awayScore" + i).text(data["ps"]["" + i]["score"]["c2"]);
+                    if (isRevers) {
+                      $("#homeScore" + i).text(
+                        data["ps"]["" + i]["score"]["c2"]
+                      );
+                      $("#awayScore" + i).text(
+                        data["ps"]["" + i]["score"]["c1"]
+                      );
+                    }
+                  }
+                }
               }
               break;
             case 52:
@@ -1036,7 +1071,7 @@
                 $("#setScore").text(homeScore + "-" + awayScore);
               }
               if (data["ps"]) {
-                for (let i = 1; i < 5; i++) {
+                for (let i = 1; i < 6; i++) {
                   if (data["ps"]["" + i + ""]) {
                     $("#homeScore" + i).text(data["ps"]["" + i]["score"]["c1"]);
                     $("#awayScore" + i).text(data["ps"]["" + i]["score"]["c2"]);
