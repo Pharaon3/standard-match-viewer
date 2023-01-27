@@ -988,6 +988,7 @@
               break;
             case 51:
               // Hockey
+              matchDuration = 60
               isCountUp = true;
               $("#setScore").attr("x", 449);
               $("#period").attr("x", 351);
@@ -1056,6 +1057,40 @@
                       );
                     }
                   }
+                }
+              }
+              break;
+            case 51:
+              // Hockey
+              if (data["cl"]) {
+                setTimer(data["cl"]["m"], data["cl"]["s"]);
+                isTimerRunning = data["cl"]["r"];
+                $("#setScore").text(
+                  Math.floor(data["cl"]["m"] / 10) +
+                    "" +
+                    (data["cl"]["m"] % 10) +
+                    ":" +
+                    Math.floor(data["cl"]["s"] / 10) +
+                    (data["cl"]["s"] % 10)
+                );
+              }
+              if (data["p"] && data["p"]["n"]) {
+                $("#period").text(data["p"]["n"]);
+                if (data["p"]["n"] == "Recently Ended")
+                  $("#period").text("Ended");
+              }
+              if (data["ps"] && data["ps"]["TN"]) {
+                $("#score").text(
+                  data["ps"]["TN"]["score"]["c1"] +
+                    "-" +
+                    data["ps"]["TN"]["score"]["c2"]
+                );
+                if (isRevers) {
+                  $("#score").text(
+                    data["ps"]["TN"]["score"]["c2"] +
+                      "-" +
+                      data["ps"]["TN"]["score"]["c1"]
+                  );
                 }
               }
               break;
